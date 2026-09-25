@@ -1,0 +1,32 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export const getStaticPaths = (async () => {
+  const entries = await getCollection('writing', ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry, entries } }));
+}) satisfies GetStaticPaths;
+
+const { entry, entries } = Astro.props;
+const { Content } = await render(entry);
+const formatter = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const related = entries.filter((item: any) => item.id !== entry.id && item.data.section === entry.data.section).slice(0, 2);
+const sectionHref = `/${entry.data.section}`;
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description} image={entry.data.heroImage} article>
+  <article class="article-shell">
+    <header class="article-header">
+      <p class="article-meta"><a href={sectionHref}>/{entry.data.section}</a> · {formatter.format(entry.data.date)} · {entry.data.tags.join(' / ')}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="article-description">{entry.data.description}</p>
+    </header>
+    {entry.data.heroImage && <img class="article-hero" src={entry.data.heroImage} alt="" />}
+    <div class="prose"><Content /></div>
+    <footer class="article-footer">
+      <a href={sectionHref}>← More {entry.data.section}</a>
+      {related[0] && <a href={`/${related[0].id}`}>Read next →</a>}
+    </footer>
+  </article>
+</BaseLayout>

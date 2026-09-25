@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import photos from '../data/photos.json';
+---
+<BaseLayout title="Photos" description="A visual notebook and photography archive by Allen Akin.">
+  <div class="section-shell">
+    <PageIntro eyebrow="Photos" title="Light, place, and moments noticed." description="A visual notebook. These sample frames establish the layout until photographs and stories from my own archive arrive." accent="red" />
+    <section class="section-content" aria-labelledby="photo-notebook">
+      <div class="section-heading"><h2 id="photo-notebook">Contact sheet</h2><p>Select a frame to enlarge</p></div>
+      <PhotoGrid {photos} />
+    </section>
+  </div>
+</BaseLayout>

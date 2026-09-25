@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+  <section class="home-hero text-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Builder · Technologist · Photographer</p>
+      <h1>Allen Akin</h1>
+      <p class="intro">I build technology, think through mathematics, and keep notes on the music, books, photographs, and questions that shape the work.</p>
+      <nav class="hero-links" aria-label="Featured sections">
+        <a href="/about">About</a>
+        <a href="/math">Writing</a>
+        <a href="/photos">Photography</a>
+      </nav>
+    </div>
+    <figure class="home-art">
+      <img
+        src="https://images.unsplash.com/photo-1758239651959-61770ec854cd?auto=format&fit=crop&fm=webp&q=82&w=1200"
+        srcset="https://images.unsplash.com/photo-1758239651959-61770ec854cd?auto=format&fit=crop&fm=webp&q=82&w=720 720w, https://images.unsplash.com/photo-1758239651959-61770ec854cd?auto=format&fit=crop&fm=webp&q=82&w=1200 1200w, https://images.unsplash.com/photo-1758239651959-61770ec854cd?auto=format&fit=crop&fm=webp&q=82&w=1800 1800w"
+        sizes="(max-width: 900px) calc(100vw - 2rem), 38vw"
+        alt="Warm evening light falling across the geometric timber facade of a modern building"
+        fetchpriority="high"
+      />
+      <figcaption>
+        Photo by <a href="https://unsplash.com/@ninjason?utm_source=allenkunle&utm_medium=referral">Jason Leung</a>
+      </figcaption>
+    </figure>
+  </section>
+  <section class="home-strip">
+    <h2>Currently building InfraRed.</h2>
+    <div>
+      <p>InfraRed is financial operations software for construction. This site is the wider desk around that work: technical writing, personal essays, records, books, and photographs.</p>
+      <a class="text-link" href="/about">More about me →</a>
+    </div>
+  </section>
+</BaseLayout>

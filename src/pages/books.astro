@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import MediaShelf from '../components/MediaShelf.astro';
+import books from '../data/books.json';
+---
+<BaseLayout title="Books" description="Books Allen Akin is reading, with notes and reflections.">
+  <div class="section-shell">
+    <PageIntro eyebrow="Books" title="Reading with a pencil nearby." description="Books in progress, books I return to, and the ideas that remain after the last page." accent="green" />
+    <figure class="section-visual">
+      <img src="/images/samples/books.webp" alt="A person reading in a library filled with books" loading="eager" />
+      <figcaption>Sample image · <a href="https://unsplash.com/photos/person-reading-a-book-in-a-library-full-of-books-J7lC6BzGuZs" target="_blank" rel="noreferrer">Emmanuel Black / Unsplash</a></figcaption>
+    </figure>
+    <section class="section-content" aria-labelledby="book-shelf">
+      <div class="section-heading"><h2 id="book-shelf">On the shelf</h2><p>{books.length ? 'Select a book for notes' : 'Being catalogued'}</p></div>
+      {books.length ? <MediaShelf items={books} type="book" /> : <div class="empty-sheet"><span>Reading notes</span><p>I’m cataloguing the books I want to share here.</p></div>}
+    </section>
+  </div>
+</BaseLayout>

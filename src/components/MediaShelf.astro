@@ -1,0 +1,48 @@
+---
+const { items, type } = Astro.props;
+const isBook = type === 'book';
+---
+
+<div class={`media-shelf ${isBook ? 'book-shelf' : 'record-shelf'}`}>
+  {items.map((item: any, index: number) => {
+    const title = isBook ? item.title : item.release;
+    const creator = isBook ? item.author : item.artist;
+    const meta = isBook ? item.status : `${item.format} · ${item.listened}`;
+    return (
+      <button class="media-item" type="button" data-dialog-open={`media-${index}`} aria-label={`Read notes on ${title}`}>
+        <span class="media-art" style={`--media-index:${index}`}>
+          <span class="media-monogram">{title.slice(0, 1)}</span>
+          <span class="media-rule"></span>
+          <small>{creator}</small>
+        </span>
+        <span class="media-info"><strong>{title}</strong><span>{creator}</span></span>
+      </button>
+      <dialog class="detail-dialog" id={`media-${index}`}>
+        <button class="dialog-close" type="button" data-dialog-close aria-label="Close">×</button>
+        <p class="eyebrow">{meta}</p>
+        <h2>{title}</h2>
+        <p class="dialog-creator">{creator}</p>
+        <p>{isBook ? item.notes : item.commentary}</p>
+        {isBook && item.rating && <p class="rating">{item.rating} / 5</p>}
+      </dialog>
+    );
+  })}
+</div>
+
+<script>
+  document.querySelectorAll('[data-dialog-open]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.getAttribute('data-dialog-open');
+      const dialog = id ? document.getElementById(id) : null;
+      if (dialog instanceof HTMLDialogElement) dialog.showModal();
+    });
+  });
+  document.querySelectorAll('[data-dialog-close]').forEach((button) => {
+    button.addEventListener('click', () => button.closest('dialog')?.close());
+  });
+  document.querySelectorAll('dialog').forEach((dialog) => {
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  });
+</script>

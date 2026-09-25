@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f3e9"/>
+  <path d="M0 0H1200V14H0Z" fill="#20221f"/>
+  <text x="76" y="112" fill="#20221f" font-family="Newsreader, Georgia, serif" font-size="52" font-weight="500">Allen Akin</text>
+  <line x1="76" y1="144" x2="1124" y2="144" stroke="#d7d0c0"/>
+  <text x="76" y="328" fill="#20221f" font-family="Georgia, serif" font-size="105">Ideas, work,</text>
+  <text x="76" y="438" fill="#20221f" font-family="Georgia, serif" font-size="105">and a wider life.</text>
+  <text x="82" y="536" fill="#66685f" font-family="Arial, sans-serif" font-size="22">TECHNOLOGY · MATHEMATICS · MUSIC · BOOKS · PHOTOGRAPHY</text>
+  <circle cx="1106" cy="534" r="8" fill="#b64f3f"/>
+</svg>

@@ -1,0 +1,17 @@
+---
+import { BriefcaseBusiness, GitBranch, Mail, Rss } from '@lucide/astro';
+---
+
+<footer class="site-footer">
+  <div>
+    <p class="footer-mark">Allen Akin</p>
+    <p>Work, ideas, records, books, and photographs.</p>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:hello@allenkunle.me" aria-label="Email Allen"><Mail size={18} /></a>
+    <a href="https://github.com/allenakinkunle" rel="me" aria-label="Allen on GitHub"><GitBranch size={18} /></a>
+    <a href="https://www.linkedin.com/in/allenkunle" rel="me" aria-label="Allen on LinkedIn"><BriefcaseBusiness size={18} /></a>
+    <a href="/rss.xml" aria-label="RSS feed"><Rss size={18} /></a>
+  </div>
+  <p class="footer-copy">© {new Date().getFullYear()}</p>
+</footer>

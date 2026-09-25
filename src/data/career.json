@@ -1,0 +1,23 @@
+[
+  {
+    "organization": "InfraRed",
+    "role": "Founder",
+    "period": "Now",
+    "summary": "Building financial operations software for construction: the practical systems that help complex work stay legible, accountable, and moving.",
+    "order": 1
+  },
+  {
+    "organization": "EY",
+    "role": "Senior Manager, Data Science",
+    "period": "Previously",
+    "summary": "Led and delivered data science work, turning emerging AI capabilities into useful products and decisions for large organizations.",
+    "order": 2
+  },
+  {
+    "organization": "Banking",
+    "role": "AI Scientist",
+    "period": "Earlier",
+    "summary": "Built applied AI systems in banking, with an eye on the gap between a promising model and software people can depend on.",
+    "order": 3
+  }
+]

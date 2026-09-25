@@ -1,0 +1,50 @@
+[
+  {
+    "image": "/images/samples/architecture.webp",
+    "alt": "Black and white view looking up at a geometric high-rise building",
+    "caption": "Lines and repetition",
+    "date": "Sample",
+    "location": "Architecture study",
+    "camera": "",
+    "lens": "",
+    "series": "Sample studies",
+    "credit": "Joel Filipe",
+    "source": "https://unsplash.com/photos/white-and-black-high-rise-building-dSwjsxtDNbI"
+  },
+  {
+    "image": "/images/samples/stairs.webp",
+    "alt": "Black and white photograph of a curved staircase",
+    "caption": "Upward",
+    "date": "Sample",
+    "location": "Stair study",
+    "camera": "",
+    "lens": "",
+    "series": "Sample studies",
+    "credit": "sq lim",
+    "source": "https://unsplash.com/photos/a-black-and-white-photo-of-a-staircase-RPT9QxdL1IM"
+  },
+  {
+    "image": "/images/samples/passing.webp",
+    "alt": "People walking past an angular staircase in black and white",
+    "caption": "Passing through",
+    "date": "Sample",
+    "location": "San Francisco",
+    "camera": "",
+    "lens": "",
+    "series": "Sample studies",
+    "credit": "David Klein",
+    "source": "https://unsplash.com/photos/people-walk-past-stairs-in-a-black-and-white-shot-BWPvV4vDNl4"
+  },
+  {
+    "image": "/images/samples/coast.webp",
+    "alt": "Grainy black and white photograph of a person walking near the sea",
+    "caption": "A roll of film",
+    "date": "Sample",
+    "location": "Coast",
+    "camera": "Canon EOS 3",
+    "lens": "Ilford Delta 400",
+    "series": "Sample studies",
+    "credit": "Annie Spratt",
+    "source": "https://unsplash.com/photos/a-black-and-white-photo-of-a-person-walking-GdxQskW5QD0"
+  }
+]

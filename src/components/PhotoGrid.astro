@@ -1,0 +1,40 @@
+---
+import { Expand } from '@lucide/astro';
+const { photos } = Astro.props;
+---
+
+<div class="photo-grid">
+  {photos.map((photo: any, index: number) => (
+    <figure class="photo-entry">
+      <button class="photo-tile" type="button" data-photo-open={`photo-${index}`} aria-label={`Open ${photo.caption}`}>
+        <img src={photo.image} alt={photo.alt} loading={index > 1 ? 'lazy' : 'eager'} />
+        <span><strong>{photo.caption}</strong><small>{photo.location}, {photo.date}</small></span>
+        <Expand size={18} aria-hidden="true" />
+      </button>
+      <figcaption>Sample image · <a href={photo.source} target="_blank" rel="noreferrer">{photo.credit} / Unsplash</a></figcaption>
+    </figure>
+    <dialog class="photo-dialog" id={`photo-${index}`}>
+      <button class="dialog-close" type="button" data-dialog-close aria-label="Close">×</button>
+      <img src={photo.image} alt={photo.alt} />
+      <div>
+        <h2>{photo.caption}</h2>
+        <p>{photo.location} · {photo.date}</p>
+        {(photo.camera || photo.lens) && <p>{[photo.camera, photo.lens].filter(Boolean).join(' · ')}</p>}
+        <p><a href={photo.source} target="_blank" rel="noreferrer">Photo by {photo.credit} on Unsplash</a></p>
+      </div>
+    </dialog>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('[data-photo-open]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.getAttribute('data-photo-open');
+      const dialog = id ? document.getElementById(id) : null;
+      if (dialog instanceof HTMLDialogElement) dialog.showModal();
+    });
+  });
+  document.querySelectorAll('[data-dialog-close]').forEach((button) => {
+    button.addEventListener('click', () => button.closest('dialog')?.close());
+  });
+</script>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import MediaShelf from '../components/MediaShelf.astro';
+import music from '../data/music.json';
+---
+<BaseLayout title="Music" description="Records and albums Allen Akin is listening to.">
+  <div class="section-shell">
+    <PageIntro eyebrow="Music" title="Records in rotation." description="Albums, vinyl, and small listening notes about the details that make me turn a record over and begin again." accent="red" />
+    <figure class="section-visual section-visual-dark">
+      <img src="/images/samples/vinyl.webp" alt="A black vinyl record on a turntable" loading="eager" />
+      <figcaption>Sample image · <a href="https://unsplash.com/photos/black-and-silver-vinyl-record-SpsIhzycrFI" target="_blank" rel="noreferrer">Nik / Unsplash</a></figcaption>
+    </figure>
+    <section class="section-content" aria-labelledby="record-shelf">
+      <div class="section-heading"><h2 id="record-shelf">Now playing</h2><p>{music.length ? 'Select a record for notes' : 'The needle drops soon'}</p></div>
+      {music.length ? <MediaShelf items={music} type="music" /> : <div class="empty-sheet"><span>Listening notes</span><p>I’m pulling together the first records for this shelf.</p></div>}
+    </section>
+  </div>
+</BaseLayout>

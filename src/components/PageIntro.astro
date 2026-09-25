@@ -1,0 +1,16 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  accent?: string;
+}
+const { eyebrow, title, description, accent = 'green' } = Astro.props;
+---
+
+<header class={`page-intro accent-${accent}`}>
+  <div class="page-intro-tab">/{eyebrow.toLowerCase()}</div>
+  <p class="eyebrow">{eyebrow}</p>
+  <h1>{title}</h1>
+  <p class="lede">{description}</p>
+</header>

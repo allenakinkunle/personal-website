@@ -1,0 +1,28 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+const { entries, emptyText = 'Notes are being prepared for this section.' } = Astro.props;
+const formatter = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+---
+
+{entries.length ? (
+  <ol class="writing-list">
+    {entries.map((entry: any, index: number) => (
+      <li>
+        <a href={`/${entry.id}`}>
+          <span class="writing-index">{String(index + 1).padStart(2, '0')}</span>
+          <span class="writing-copy">
+            <span class="writing-meta">{formatter.format(entry.data.date)} · {entry.data.tags.slice(0, 2).join(' / ')}</span>
+            <strong>{entry.data.title}</strong>
+            <span>{entry.data.description}</span>
+          </span>
+          <ArrowUpRight size={20} aria-hidden="true" />
+        </a>
+      </li>
+    ))}
+  </ol>
+) : (
+  <div class="empty-sheet">
+    <span>New page</span>
+    <p>{emptyText}</p>
+  </div>
+)}

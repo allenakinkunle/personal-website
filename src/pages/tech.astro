@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import WritingList from '../components/WritingList.astro';
+const entries = (await getCollection('writing', ({ data }) => data.section === 'tech' && !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Tech" description="Notes from Allen Akin on software, products, AI, and entrepreneurship.">
+  <div class="section-shell">
+    <PageIntro eyebrow="Tech" title="Notes from the workbench." description="Software, artificial intelligence, product decisions, and an honest record of building companies." accent="blue" />
+    <section class="section-content" aria-labelledby="tech-writing">
+      <div class="section-heading"><h2 id="tech-writing">Writing</h2><p>{entries.length ? `${entries.length} articles` : 'The next chapter'}</p></div>
+      <WritingList {entries} emptyText="I’m preparing notes on building InfraRed, product decisions, and the technology underneath it." />
+    </section>
+  </div>
+</BaseLayout>

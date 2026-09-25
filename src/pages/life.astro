@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import WritingList from '../components/WritingList.astro';
+const entries = (await getCollection('writing', ({ data }) => data.section === 'life' && !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Life" description="Personal essays and observations by Allen Akin.">
+  <div class="section-shell">
+    <PageIntro eyebrow="Life" title="The view beyond the screen." description="Personal essays, observations, and longer thoughts about living, making, changing direction, and paying attention." accent="pink" />
+    <section class="section-content" aria-labelledby="life-writing">
+      <div class="section-heading"><h2 id="life-writing">Essays</h2><p>{entries.length ? `${entries.length} essays` : 'From the notebook'}</p></div>
+      <WritingList {entries} emptyText="Substack essays will be mirrored here as local, easy-to-read articles." />
+    </section>
+  </div>
+</BaseLayout>

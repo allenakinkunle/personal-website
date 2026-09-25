@@ -1,20 +1,20 @@
-## Description
-This is the personal website of Allen Akinkunle, hosted by [Github Pages](https://pages.github.com/). You can check the website out on [allenkunle.me](http://www.allenkunle.me).
+# allenkunle.me
 
-## Say 'Hello'
-I am currently a Data Scientist based in London, United Kingdom. I work within EY's Data & Analytics team (Transaction Advisory Services service line). I write about data science, machine learning, data visualisation and software development.
+Allen Akin's personal site, built with Astro and deployed as a static site.
 
-I tweet about random stuff: [**Twitter**](http://twitter.com/allenakinkunle)
+## Development
 
-Send me an email: [**Email**](mailto:hello@allenkunle.me)
+```sh
+npm install
+npm run dev
+```
 
-Check out my LinkedIn Profile: [**LinkedIn**](http://uk.linkedin.com/in/allenkunle)
+Content lives in `src/content/writing`, `src/data`, and `public/photos`. Run `npm run build` before deploying.
 
-I answer questions on Stack Overflow: [**Stack Overflow**](http://stackoverflow.com/users/1748587/akinkunle-allen)
+## Cloudflare Pages
 
-## License
-You may not reuse anything within the following folders without my permission:
-* _posts/
-* img/
+- Build command: `npm run build`
+- Output directory: `dist`
+- Node version: 22.20 or newer (use the even-numbered LTS release in `.nvmrc`)
 
-All other directories and files are MIT Licensed. Feel free to use the HTML and CSS as you please.
+Add `allenkunle.me` as the custom domain in Cloudflare Pages after the first deployment.
