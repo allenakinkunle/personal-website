@@ -11,6 +11,8 @@ const writing = defineCollection({
     section: z.enum(['math', 'tech', 'life']),
     tags: z.array(z.string()).default([]),
     heroImage: z.string().optional(),
+    substackId: z.string().optional(),
+    originalUrl: z.url().optional(),
     draft: z.boolean().default(false),
     canonicalUrl: z.url().optional(),
   }),

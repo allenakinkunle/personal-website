@@ -1,0 +1,217 @@
+---
+import {
+  BookOpen,
+  BatteryFull,
+  ChevronLeft,
+  Calculator,
+  FileText,
+  Folder,
+  Grid2x2,
+  Images,
+  Mail,
+  Monitor,
+  Music2,
+  NotebookPen,
+  Power,
+  Rss,
+  Square,
+  UserRound,
+  Volume2,
+  Wifi,
+  X,
+  Minus,
+} from '@lucide/astro';
+
+interface Props {
+  activeKey?: string;
+  currentPath: string;
+  windowTitle: string;
+  article?: boolean;
+}
+
+const { activeKey = 'home', currentPath, windowTitle, article = false } = Astro.props;
+
+const apps = [
+  { key: 'home', label: 'Home', href: '/', icon: Monitor, color: 'blue' },
+  { key: 'about', label: 'About Me', href: '/about', icon: UserRound, color: 'orange' },
+  { key: 'math', label: 'Math Lab', href: '/math', icon: Calculator, color: 'yellow' },
+  { key: 'tech', label: 'Tech Notes', href: '/tech', icon: NotebookPen, color: 'cyan' },
+  { key: 'music', label: 'Media Player', href: '/music', icon: Music2, color: 'red' },
+  { key: 'books', label: 'My Library', href: '/books', icon: BookOpen, color: 'green' },
+  { key: 'photos', label: 'My Pictures', href: '/photos', icon: Images, color: 'purple' },
+  { key: 'life', label: 'Life.doc', href: '/life', icon: FileText, color: 'pink' },
+  { key: 'subscribe', label: 'Subscribe', href: '/subscribe', icon: Mail, color: 'mail' },
+];
+
+const activeApp = apps.find((app) => app.key === activeKey) ?? apps[0];
+const ActiveIcon = activeApp.icon;
+const title = article ? `WordPad - ${windowTitle}` : windowTitle;
+const showBackButton = activeKey !== 'home';
+---
+
+<div class={`os-screen app-${activeKey}`} data-current-path={currentPath}>
+  <header class="os-top-panel">
+    <button class="os-start-button" type="button" data-start-button aria-expanded="false" aria-controls="start-menu">
+      <span>Activities</span>
+    </button>
+    <button class="os-task-button is-running" type="button" data-task-button aria-label={`Show or hide ${title}`}>
+      <ActiveIcon size={15} stroke-width={2} aria-hidden="true" /><span>{title}</span>
+    </button>
+    <time data-os-clock></time>
+    <div class="os-tray" aria-label="System status">
+      <a href="/rss.xml" aria-label="RSS feed" title="RSS feed"><Rss size={14} /></a>
+      <Wifi size={14} aria-label="Network connected" />
+      <Volume2 size={14} aria-label="Sound" />
+      <BatteryFull size={15} aria-label="Battery" />
+      <Power size={14} aria-label="Power menu" />
+    </div>
+  </header>
+
+  <div class="os-desktop">
+    <nav class="os-desktop-icons" aria-label="Favorite applications">
+      {apps.map(({ key, label, href, icon: Icon, color }) => (
+        <a class={`os-shortcut ${key === activeKey ? 'is-active' : ''}`} href={href} aria-current={key === activeKey ? 'page' : undefined} title={label}>
+          <span class={`shortcut-icon shortcut-${color}`}><Icon size={30} stroke-width={1.75} aria-hidden="true" /></span>
+          <span>{label}</span>
+        </a>
+      ))}
+      <button class="os-show-apps" type="button" data-show-apps aria-label="Show applications" title="Show Applications"><Grid2x2 size={25} /></button>
+    </nav>
+
+    <nav class="os-desktop-files" aria-label="Desktop folders">
+      <a href="/about"><span class="desktop-file-icon"><Folder size={34} /></span><span>Allen Akin</span></a>
+      <a href="/life"><span class="desktop-file-icon"><FileText size={34} /></span><span>Life.doc</span></a>
+      <a href="/photos"><span class="desktop-file-icon"><Images size={34} /></span><span>Pictures</span></a>
+    </nav>
+
+    <section class={`os-window is-active ${article ? 'is-document' : ''}`} data-os-window aria-label={title}>
+      <header class="os-titlebar" data-window-drag>
+        <span class="titlebar-icon"><ActiveIcon size={15} stroke-width={2} aria-hidden="true" /></span>
+        <strong>{title}</strong>
+        <div class="os-window-controls">
+          <button type="button" data-window-minimize aria-label={`Minimize ${title}`} title="Minimize"><Minus size={12} stroke-width={3} /></button>
+          <button type="button" data-window-maximize aria-label={`Maximize ${title}`} title="Maximize"><Square size={10} stroke-width={2.5} /></button>
+          <button type="button" data-window-close aria-label={`Close ${title}`} title="Close"><X size={12} stroke-width={3} /></button>
+        </div>
+      </header>
+      {showBackButton && (
+        <div class="os-explorer-chrome os-backbar" aria-label="Application navigation">
+          <div class="os-toolbar">
+            <button type="button" data-history-back aria-label="Back" title="Back"><ChevronLeft size={18} stroke-width={2.5} /><span>Back</span></button>
+          </div>
+        </div>
+      )}
+      <main id="main-content" class="os-window-body" tabindex="-1">
+        <slot />
+      </main>
+      <footer class="os-statusbar"><span>{currentPath}</span><span>Ready</span></footer>
+    </section>
+  </div>
+
+  <div class="os-start-menu" id="start-menu" hidden>
+    <div class="activities-heading"><strong>Applications</strong><span>Allen Akin</span></div>
+    <div class="start-apps">
+      {apps.map(({ label, href, icon: Icon, color }) => (
+        <a href={href}><span class={`start-icon shortcut-${color}`}><Icon size={28} /></span><span>{label}</span></a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  const screen = document.querySelector('.os-screen');
+  const win = document.querySelector('[data-os-window]');
+  const startButton = document.querySelector('[data-start-button]');
+  const showAppsButton = document.querySelector('[data-show-apps]');
+  const startMenu = document.querySelector('.os-start-menu');
+  const taskButton = document.querySelector('[data-task-button]');
+  const closeButton = document.querySelector('[data-window-close]');
+  const minimizeButton = document.querySelector('[data-window-minimize]');
+  const maximizeButton = document.querySelector('[data-window-maximize]');
+  const dragHandle = document.querySelector('[data-window-drag]');
+  const clock = document.querySelector('[data-os-clock]');
+  const historyBack = document.querySelector('[data-history-back]');
+
+  const setMinimized = (minimized: boolean) => {
+    if (!(win instanceof HTMLElement) || !(taskButton instanceof HTMLElement)) return;
+    win.hidden = minimized;
+    taskButton.classList.toggle('is-running', !minimized);
+    taskButton.setAttribute('aria-pressed', String(!minimized));
+  };
+
+  const toggleApplications = (event?: Event) => {
+    event?.stopPropagation();
+    if (!(startMenu instanceof HTMLElement)) return;
+    const open = startMenu.hidden;
+    startMenu.hidden = !open;
+    startButton?.setAttribute('aria-expanded', String(open));
+  };
+
+  startButton?.addEventListener('click', toggleApplications);
+  showAppsButton?.addEventListener('click', toggleApplications);
+
+  document.addEventListener('click', (event) => {
+    if (!(startMenu instanceof HTMLElement) || startMenu.hidden) return;
+    const target = event.target;
+    if (target instanceof Node && !startMenu.contains(target) && !startButton?.contains(target)) {
+      startMenu.hidden = true;
+      startButton?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (startMenu instanceof HTMLElement && !startMenu.hidden) {
+      startMenu.hidden = true;
+      startButton?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  minimizeButton?.addEventListener('click', () => setMinimized(true));
+  taskButton?.addEventListener('click', () => setMinimized(!(win instanceof HTMLElement && win.hidden)));
+  maximizeButton?.addEventListener('click', () => win?.classList.toggle('is-maximized'));
+  historyBack?.addEventListener('click', () => {
+    const referrer = document.referrer ? new URL(document.referrer) : null;
+    if (referrer?.origin === window.location.origin) window.history.back();
+    else window.location.href = '/';
+  });
+  closeButton?.addEventListener('click', () => {
+    if (screen?.getAttribute('data-current-path') !== '/') window.location.href = '/';
+    else setMinimized(true);
+  });
+
+  if (dragHandle instanceof HTMLElement && win instanceof HTMLElement) {
+    dragHandle.addEventListener('pointerdown', (event) => {
+      if (window.matchMedia('(max-width: 760px)').matches || win.classList.contains('is-maximized')) return;
+      if ((event.target instanceof Element) && event.target.closest('button')) return;
+      const startRect = win.getBoundingClientRect();
+      const offsetX = event.clientX - startRect.left;
+      const offsetY = event.clientY - startRect.top;
+      dragHandle.setPointerCapture(event.pointerId);
+
+      const move = (moveEvent: PointerEvent) => {
+        const maxLeft = window.innerWidth - Math.min(win.offsetWidth, 260);
+        const maxTop = window.innerHeight - 110;
+        win.style.left = `${Math.max(0, Math.min(maxLeft, moveEvent.clientX - offsetX))}px`;
+        win.style.top = `${Math.max(0, Math.min(maxTop, moveEvent.clientY - offsetY))}px`;
+      };
+      const stop = () => {
+        dragHandle.removeEventListener('pointermove', move);
+        dragHandle.removeEventListener('pointerup', stop);
+        dragHandle.removeEventListener('pointercancel', stop);
+      };
+      dragHandle.addEventListener('pointermove', move);
+      dragHandle.addEventListener('pointerup', stop);
+      dragHandle.addEventListener('pointercancel', stop);
+    });
+  }
+
+  const updateClock = () => {
+    if (!(clock instanceof HTMLTimeElement)) return;
+    const now = new Date();
+    clock.dateTime = now.toISOString();
+    clock.textContent = new Intl.DateTimeFormat([], { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(now);
+  };
+  updateClock();
+  window.setInterval(updateClock, 30000);
+</script>

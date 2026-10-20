@@ -2,9 +2,15 @@
   "name": "allenkunle-me",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
+    "stop": "astro dev stop",
     "build": "astro check && astro build",
+    "import:substack": "node scripts/import-substack-posts.mjs",
+    "prepare:subscribers": "node scripts/prepare-substack-subscribers.mjs",
     "preview": "astro preview",
     "check": "astro check"
   },
@@ -19,6 +25,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@types/turndown": "^5.0.6",
+    "csv-parse": "^7.0.3",
+    "turndown": "^7.2.4",
     "typescript": "^6.0.3"
   }
 }

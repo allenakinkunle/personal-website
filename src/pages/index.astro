@@ -1,37 +1,44 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BookOpen, Calculator, FileText, Images, Mail, Music2, NotebookPen, UserRound } from '@lucide/astro';
+
+const programs = [
+  { label: 'About Me', detail: 'Career, current work, and interests', href: '/about', icon: UserRound, color: 'orange' },
+  { label: 'Tech Notes', detail: 'Technology, products, and building companies', href: '/tech', icon: NotebookPen, color: 'cyan' },
+  { label: 'Math Lab', detail: 'Mathematics, machine learning, and statistics', href: '/math', icon: Calculator, color: 'yellow' },
+  { label: 'Media Player', detail: 'Records and albums in rotation', href: '/music', icon: Music2, color: 'red' },
+  { label: 'My Library', detail: 'Books and reading notes', href: '/books', icon: BookOpen, color: 'green' },
+  { label: 'My Pictures', detail: 'Photography and visual notes', href: '/photos', icon: Images, color: 'purple' },
+  { label: 'Life.doc', detail: 'Personal essays and observations', href: '/life', icon: FileText, color: 'pink' },
+  { label: 'Subscribe', detail: 'Choose Tech Notes, Life.doc, or both', href: '/subscribe', icon: Mail, color: 'mail' },
+];
 ---
 
 <BaseLayout>
-  <section class="home-hero text-hero">
-    <div class="hero-copy">
+  <section class="welcome-view">
+    <header class="welcome-header">
       <p class="eyebrow">Builder · Technologist · Photographer</p>
       <h1>Allen Akin</h1>
-      <p class="intro">I build technology, think through mathematics, and keep notes on the music, books, photographs, and questions that shape the work.</p>
-      <nav class="hero-links" aria-label="Featured sections">
-        <a href="/about">About</a>
-        <a href="/math">Writing</a>
-        <a href="/photos">Photography</a>
-      </nav>
-    </div>
-    <figure class="home-art">
-      <img
-        src="https://images.unsplash.com/photo-1758239651959-61770ec854cd?auto=format&fit=crop&fm=webp&q=82&w=1200"
-        srcset="https://images.unsplash.com/photo-1758239651959-61770ec854cd?auto=format&fit=crop&fm=webp&q=82&w=720 720w, https://images.unsplash.com/photo-1758239651959-61770ec854cd?auto=format&fit=crop&fm=webp&q=82&w=1200 1200w, https://images.unsplash.com/photo-1758239651959-61770ec854cd?auto=format&fit=crop&fm=webp&q=82&w=1800 1800w"
-        sizes="(max-width: 900px) calc(100vw - 2rem), 38vw"
-        alt="Warm evening light falling across the geometric timber facade of a modern building"
-        fetchpriority="high"
-      />
-      <figcaption>
-        Photo by <a href="https://unsplash.com/@ninjason?utm_source=allenkunle&utm_medium=referral">Jason Leung</a>
-      </figcaption>
-    </figure>
-  </section>
-  <section class="home-strip">
-    <h2>Currently building InfraRed.</h2>
-    <div>
+      <p>I build technology, think through mathematics, and keep notes on the music, books, photographs, and questions that shape the work.</p>
+    </header>
+
+    <section class="welcome-panel" aria-labelledby="programs-heading">
+      <h2 id="programs-heading">Programs and folders</h2>
+      <div class="program-list">
+        {programs.map(({ label, detail, href, icon: Icon, color }) => (
+          <a href={href}>
+            <span class={`program-icon shortcut-${color}`}><Icon size={22} stroke-width={1.8} /></span>
+            <span><strong>{label}</strong><small>{detail}</small></span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="welcome-note">
+      <h2>Current note</h2>
+      <strong>Building InfraRed</strong>
       <p>InfraRed is financial operations software for construction. This site is the wider desk around that work: technical writing, personal essays, records, books, and photographs.</p>
-      <a class="text-link" href="/about">More about me →</a>
-    </div>
+      <a href="/about">Open About Me</a>
+    </section>
   </section>
 </BaseLayout>

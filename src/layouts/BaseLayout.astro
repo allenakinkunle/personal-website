@@ -1,6 +1,5 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import DesktopShell from '../components/DesktopShell.astro';
 import '../styles/global.css';
 import 'katex/dist/katex.min.css';
 
@@ -9,6 +8,7 @@ interface Props {
   description?: string;
   image?: string;
   article?: boolean;
+  appKey?: string;
 }
 
 const {
@@ -16,10 +16,25 @@ const {
   description = 'Building at the intersection of technology, mathematics, and the things that make a life interesting.',
   image = '/social-card.svg',
   article = false,
+  appKey,
 } = Astro.props;
 const pageTitle = title === 'Allen Akin' ? title : `${title} | Allen Akin`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
+const routeKey = Astro.url.pathname.split('/').filter(Boolean)[0] ?? 'home';
+const activeKey = appKey ?? routeKey;
+const appTitles: Record<string, string> = {
+  home: 'Welcome',
+  about: 'Files - About Allen',
+  math: 'Calculator - Math Lab',
+  tech: 'Text Editor - Tech Notes',
+  music: 'Music',
+  books: 'Library',
+  photos: 'Photos',
+  life: 'Text Editor - Life.doc',
+  subscribe: 'Mail - Subscribe',
+};
+const windowTitle = article ? title : (appTitles[activeKey] ?? title);
 ---
 
 <!doctype html>
@@ -33,7 +48,7 @@ const socialImage = new URL(image, Astro.site);
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="alternate" type="application/rss+xml" title="Allen Akin" href="/rss.xml" />
     <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:title" content={pageTitle} />
@@ -49,11 +64,9 @@ const socialImage = new URL(image, Astro.site);
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <Header currentPath={Astro.url.pathname} />
-    <main id="main-content">
+    <DesktopShell currentPath={Astro.url.pathname} {activeKey} {windowTitle} {article}>
       <slot />
-    </main>
-    <Footer />
+    </DesktopShell>
   </body>
 </html>
 

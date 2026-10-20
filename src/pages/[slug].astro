@@ -15,14 +15,13 @@ const related = entries.filter((item: any) => item.id !== entry.id && item.data.
 const sectionHref = `/${entry.data.section}`;
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description} image={entry.data.heroImage} article>
+<BaseLayout title={entry.data.title} description={entry.data.description} image={entry.data.heroImage} article appKey={entry.data.section}>
   <article class="article-shell">
     <header class="article-header">
       <p class="article-meta"><a href={sectionHref}>/{entry.data.section}</a> · {formatter.format(entry.data.date)} · {entry.data.tags.join(' / ')}</p>
       <h1>{entry.data.title}</h1>
       <p class="article-description">{entry.data.description}</p>
     </header>
-    {entry.data.heroImage && <img class="article-hero" src={entry.data.heroImage} alt="" />}
     <div class="prose"><Content /></div>
     <footer class="article-footer">
       <a href={sectionHref}>← More {entry.data.section}</a>

@@ -1,0 +1,5 @@
+EMAILOCTOPUS_API_KEY=replace-with-a-v2-api-key
+EMAILOCTOPUS_LIST_ID=replace-with-your-list-id
+EMAILOCTOPUS_WEBHOOK_SECRET=replace-with-your-webhook-secret
+TURNSTILE_SECRET_KEY=
+PUBLIC_TURNSTILE_SITE_KEY=

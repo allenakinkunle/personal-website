@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<BaseLayout title="Subscribe" description="Subscribe to Tech Notes and Life.doc by Allen Akin.">
+  <section class="subscribe-view">
+    <div class="subscribe-dialog">
+      <header>
+        <h1>Subscribe to Allen Akin</h1>
+        <p>Choose the writing you would like to receive. Emails contain a short excerpt and a link to read the full article here.</p>
+      </header>
+
+      <form class="subscribe-form" data-subscribe-form>
+        <label class="field-label" for="subscriber-email">Email address</label>
+        <input id="subscriber-email" name="email" type="email" autocomplete="email" required />
+
+        <fieldset>
+          <legend>Send me</legend>
+          <label><input type="checkbox" name="topic" value="tech" checked /><span><strong>Tech Notes</strong><small>Technology, products, AI, and building companies.</small></span></label>
+          <label><input type="checkbox" name="topic" value="life" checked /><span><strong>Life.doc</strong><small>Personal essays, observations, books, and everything beyond the screen.</small></span></label>
+        </fieldset>
+
+        {turnstileSiteKey && <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>}
+
+        <p class="subscribe-status" data-subscribe-status role="status"></p>
+        <div class="subscribe-actions">
+          <button type="submit">Subscribe</button>
+          <a href="/">Cancel</a>
+        </div>
+        <p class="subscribe-fineprint">Every message includes an unsubscribe link. No spam, no paid tier.</p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector('[data-subscribe-form]');
+  const status = document.querySelector('[data-subscribe-status]');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) return;
+    const button = form.querySelector('button[type="submit"]');
+    const data = new FormData(form);
+    const topics = data.getAll('topic');
+    status.textContent = 'Subscribing...';
+    if (button instanceof HTMLButtonElement) button.disabled = true;
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email: data.get('email'), topics, turnstileToken: data.get('cf-turnstile-response') }),
+      });
+      const result = await response.json();
+      status.textContent = result.message;
+      if (response.ok) form.reset();
+    } catch {
+      status.textContent = 'Subscription is temporarily unavailable.';
+    } finally {
+      if (button instanceof HTMLButtonElement) button.disabled = false;
+    }
+  });
+</script>
+{turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
