@@ -65,7 +65,7 @@ const makeDescription = (markdown) => {
     .split(/\n\s*\n/)
     .map(plainText)
     .filter((paragraph) => paragraph.length > 30);
-  const text = paragraphs[0] ?? 'An essay from Allen Akin’s Life.doc archive.';
+  const text = paragraphs[0] ?? 'An essay from Allen Akin’s Just The Right Fit archive.';
   if (text.length <= 180) return text;
   return `${text.slice(0, 177).replace(/\s+\S*$/, '')}...`;
 };

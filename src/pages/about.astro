@@ -1,41 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
-import career from '../data/career.json';
 ---
 
 <BaseLayout title="About" description="About Allen Akin: founder of InfraRed, data scientist, technologist, and photographer.">
   <div class="section-shell">
-    <PageIntro eyebrow="About" title="Building is only part of the story." description="I’m a technologist and founder interested in how complex systems become useful, legible products. The rest of my attention goes to music, photographs, books, and the many good questions between disciplines." accent="black" />
+    <PageIntro eyebrow="About" title="Who is Allen?" description="I am constantly asking questions, identifying problems, thinking of how to solve them, and then executing on the solution. The rest of my attention goes to music, photography, books, coffee, travel, and cycling." accent="black" />
 
     <section class="about-lead">
-      <h2>I like working where ideas meet the real world.</h2>
-      <div class="about-prose">
-        <p>I’m the founder of <strong>InfraRed</strong>, where I’m building financial operations software for construction. Construction is full of consequential decisions, complicated relationships, and information that rarely arrives in a neat shape. I’m interested in making that work clearer and more dependable.</p>
-        <p>Before InfraRed, I was a senior manager in EY’s data science team. I worked with teams trying to turn machine learning and emerging technology into systems people could actually use. Earlier, I worked as an AI scientist at a bank, building applied AI in an environment where rigor, reliability, and trust matter.</p>
-        <p>Those chapters taught me that a model is never the whole product. The interesting work lives in the translation: understanding a problem properly, building the right thing, and making it hold up in practice.</p>
-        <p>Away from work, I listen widely, collect records, read across science and culture, and take photographs. Those interests are not a sidebar to how I think. They sharpen my attention, give me new structures to borrow, and remind me that usefulness and beauty can belong in the same object.</p>
-      </div>
-    </section>
+      <figure class="about-portrait">
+        <div class="about-portrait-frame">
+          <img src="/images/allen-eiffel-bike.jpg" alt="Allen holding his bicycle, Red, in front of the Eiffel Tower after cycling from London to Paris" width="787" height="1400" loading="eager" />
+        </div>
+        <figcaption>At the Eiffel Tower after cycling from London to Paris with three friends over three days in August 2024. We rode to raise money for charities supporting sickle cell warriors.</figcaption>
+      </figure>
 
-    <section aria-labelledby="career-heading">
-      <div class="section-heading"><h2 id="career-heading">Selected chapters</h2><p>Work so far</p></div>
-      <div class="career-list">
-        {career.sort((a, b) => a.order - b.order).map((item) => (
-          <article class="career-item">
-            <span class="period">{item.period}</span>
-            <h3>{item.organization}<span>{item.role}</span></h3>
-            <p>{item.summary}</p>
-          </article>
-        ))}
+      <div class="about-story">
+        <div class="about-prose">
+          <p>I’m the founder of <strong><a href="https://userivets.com" target="_blank" rel="noreferrer">Rivets</a></strong>, where I’m building the AI workforce for the global construction industry.</p>
+          <p>Before founding Rivets, I spent six years at EY UK, rising through the ranks, and eventually became a Senior Manager in one of their Data Science teams. After EY, I worked as an AI Scientist at a fintech unicorn in the UK, Zopa Bank, where I focused on building applied AI in an environment where rigor, reliability, and trust matter.</p>
+          <p>Away from work, I listen to music, collect records, read, travel, drink coffee, cook for people I love, and I have taken on photography.</p>
+        </div>
       </div>
-    </section>
-
-    <section aria-labelledby="interests-heading">
-      <div class="section-heading"><h2 id="interests-heading">Elsewhere on the desk</h2><p>Follow an interest</p></div>
-      <nav class="interest-band" aria-label="Allen's interests">
-        <a href="/music">Music</a><a href="/photos">Photography</a><a href="/books">Books</a><a href="/math">Mathematics</a><a href="/tech">Technology</a>
-      </nav>
     </section>
   </div>
 </BaseLayout>

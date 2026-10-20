@@ -6,7 +6,7 @@ import books from '../data/books.json';
 ---
 <BaseLayout title="Books" description="Books Allen Akin is reading, with notes and reflections.">
   <div class="section-shell">
-    <PageIntro eyebrow="Books" title="Reading with a pencil nearby." description="Books in progress, books I return to, and the ideas that remain after the last page." accent="green" />
+    <PageIntro eyebrow="Books" title="Reading with a pencil nearby." description="Books in progress, books I love, and the books I return to." accent="green" />
     <section class="section-content" aria-labelledby="book-shelf">
       <div class="section-heading"><h2 id="book-shelf">On the shelf</h2><p>{books.length ? 'Select a book for notes' : 'Being catalogued'}</p></div>
       {books.length ? <MediaShelf items={books} type="book" /> : <div class="empty-sheet"><span>Reading notes</span><p>I’m cataloguing the books I want to share here.</p></div>}

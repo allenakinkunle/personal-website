@@ -12,7 +12,7 @@ if (!inputFile) {
 const quote = (value) => `'${String(value ?? '').replaceAll("'", "''")}'`;
 const rows = parse(readFileSync(inputFile, 'utf8'), { bom: true, columns: true, skip_empty_lines: true });
 const eligible = rows.filter((row) => row.email && row.email_disabled !== 'true');
-const sql = ['BEGIN TRANSACTION;'];
+const sql = [];
 const emailOctopusCsv = ['Email address,Tags'];
 
 for (const row of eligible) {
@@ -22,9 +22,8 @@ for (const row of eligible) {
   emailOctopusCsv.push(`${row.email.trim().toLowerCase()},life`);
 }
 
-sql.push('COMMIT;');
 mkdirSync(dirname(outputFile), { recursive: true });
 writeFileSync(outputFile, `${sql.join('\n')}\n`, { mode: 0o600 });
 const emailOctopusFile = join(dirname(outputFile), 'emailoctopus-contacts.csv');
 writeFileSync(emailOctopusFile, `${emailOctopusCsv.join('\n')}\n`, { mode: 0o600 });
-console.log(`Prepared ${eligible.length} Life.doc subscribers in ${outputFile} and ${emailOctopusFile}.`);
+console.log(`Prepared ${eligible.length} Just The Right Fit subscribers in ${outputFile} and ${emailOctopusFile}.`);

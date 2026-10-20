@@ -10,7 +10,7 @@ const entries = (await getCollection('writing', ({ data }) => data.section === '
     <PageIntro eyebrow="Tech" title="Notes from the workbench." description="Software, artificial intelligence, product decisions, and an honest record of building companies." accent="blue" />
     <section class="section-content" aria-labelledby="tech-writing">
       <div class="section-heading"><h2 id="tech-writing">Writing</h2><p>{entries.length ? `${entries.length} articles` : 'The next chapter'}</p></div>
-      <WritingList {entries} emptyText="I’m preparing notes on building InfraRed, product decisions, and the technology underneath it." />
+      <WritingList {entries} emptyText="I’m preparing notes on building Rivets, product decisions, and the technology underneath it." />
     </section>
   </div>
 </BaseLayout>

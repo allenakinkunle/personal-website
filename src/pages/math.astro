@@ -7,7 +7,7 @@ const entries = (await getCollection('writing', ({ data }) => data.section === '
 ---
 <BaseLayout title="Math" description="Allen Akin's writing on mathematics, machine learning, statistics, and data science.">
   <div class="section-shell">
-    <PageIntro eyebrow="Math" title="Models, measures, and first principles." description="Notes on machine learning, probability, statistics, and the mathematics that makes the machinery intelligible." accent="yellow" />
+    <PageIntro eyebrow="Math" title="Models, measures, and first principles." description="Notes on machine learning, probability, statistics, and mathematics" accent="yellow" />
     <section class="section-content" aria-labelledby="math-writing">
       <div class="section-heading"><h2 id="math-writing">Writing</h2><p>{entries.length} articles</p></div>
       <WritingList {entries} />

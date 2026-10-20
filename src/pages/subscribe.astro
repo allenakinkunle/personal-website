@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
-<BaseLayout title="Subscribe" description="Subscribe to Tech Notes and Life.doc by Allen Akin.">
+<BaseLayout title="Subscribe" description="Subscribe to Tech Notes and Just The Right Fit by Allen Akin.">
   <section class="subscribe-view">
     <div class="subscribe-dialog">
       <header>
@@ -18,7 +18,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         <fieldset>
           <legend>Send me</legend>
           <label><input type="checkbox" name="topic" value="tech" checked /><span><strong>Tech Notes</strong><small>Technology, products, AI, and building companies.</small></span></label>
-          <label><input type="checkbox" name="topic" value="life" checked /><span><strong>Life.doc</strong><small>Personal essays, observations, books, and everything beyond the screen.</small></span></label>
+          <label><input type="checkbox" name="topic" value="life" checked /><span><strong>Just The Right Fit</strong><small>Personal notes about the world and people.</small></span></label>
         </fieldset>
 
         {turnstileSiteKey && <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>}

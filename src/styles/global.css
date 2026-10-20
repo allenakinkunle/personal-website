@@ -699,7 +699,13 @@ body::before { display: none; }
 .photo-entry { border: 1px solid #77766e; background: #fff; box-shadow: 3px 3px 0 #bbb9ae; }
 .photo-entry > figcaption { padding: .55rem .7rem; }
 
-.about-lead { padding: 32px clamp(18px, 4vw, 42px); }
+.about-lead { grid-template-columns: minmax(220px, 360px) minmax(0, 1fr); align-items: start; gap: clamp(24px, 5vw, 64px); padding: 32px clamp(18px, 4vw, 42px); }
+.about-story { min-width: 0; }
+.about-story h2 { margin-bottom: 18px; }
+.about-portrait { margin: 0; }
+.about-portrait-frame { padding: 8px; border: 1px solid; border-color: #fff #8b8885 #8b8885 #fff; background: #e4e1de; box-shadow: 4px 5px 0 rgba(48, 43, 42, .24); }
+.about-portrait img { display: block; width: 100%; height: auto; max-height: 560px; border: 1px solid #5f5c59; object-fit: cover; object-position: center; }
+.about-portrait figcaption { margin-top: 12px; padding: 10px 11px; border-left: 3px solid var(--os-navy); background: #efeeeb; color: #494642; font: 11px/1.55 var(--os-ui); }
 .about-lead p,
 .career-item p { font: 12px/1.6 var(--os-ui); }
 .career-list { border-top-color: #aaa99f; }
@@ -795,7 +801,8 @@ body::before { display: none; }
   .section-content { padding: 2.5rem 1rem; }
   .page-intro { padding: 24px 16px 20px; }
   .page-intro h1 { padding-right: 58px; font-size: 25px; }
-  .about-lead { padding: 3rem 1rem; }
+  .about-lead { grid-template-columns: 1fr; padding: 3rem 1rem; }
+  .about-portrait { width: min(100%, 420px); margin: 0 auto; }
   .interest-band { margin: 0 1rem; }
   .detail-dialog::before { margin-right: -2rem; margin-left: -2rem; }
 }
